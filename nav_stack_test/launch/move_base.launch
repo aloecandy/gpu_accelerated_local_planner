@@ -1,0 +1,22 @@
+<launch>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find nav_stack_test)/race.yaml"/>
+  
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find nav_stack_test)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find nav_stack_test)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find nav_stack_test)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find nav_stack_test)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find nav_stack_test)/param/base_local_planner_params.yaml" command="load" />
+    
+    <param name="base_local_planner" value="my_local_planner/MyTrajectoryPlannerROS" />
+    <param name="base_global_planner" value="global_planner/GlobalPlanner"/>
+    <param name="controller_frequency" value="5"/>
+    <param name="controller_patience" value="15.0" />
+  </node>
+
+  <node name="nav_stack_test" pkg="nav_stack_test" type="nav_stack_test" output="screen">
+    <param name="file" value="/home/aloe/test.csv"/>
+  </node>
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find nav_stack_test)/nav.rviz" />
+  <node pkg="rosbag" type="record" name="record" args="-a -O nav.bag" />
+</launch>

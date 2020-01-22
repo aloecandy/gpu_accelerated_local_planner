@@ -1,0 +1,36 @@
+MyTrajectoryPlannerROS:
+  #default false
+  GPU: false
+  #0~20.0  
+  max_vel_x: 0.6
+  min_vel_x: 0.0
+
+  acc_lim_x: 1.0
+  acc_lim_theta: 6.283185307179586476925286766559 
+  acc_lim_y: 0.0
+
+  max_vel_theta: 3.1415926535897932384626433832795 
+  min_in_place_vel_theta: 0.0
+  #-20.0~0
+  min_vel_theta: -3.1415926535897932384626433832795
+    
+  holonomic_robot: false
+
+  #0~10
+  sim_time: 1.0
+  #0~5
+  sim_granularity: 0.05
+  #0~pi/2
+  angular_sim_granularity: 0.05
+
+  meter_scoring: true
+  
+
+  #1~300
+  vx_samples: 12
+  vtheta_samples: 35
+
+  occdist_scale: 0.01 
+
+  yaw_goal_tolerance: 0.05
+  xy_goal_tolerance: 0.1
